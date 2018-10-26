@@ -1,0 +1,30 @@
+{
+  "name": "raspberry-pi-cloud-gui",
+  "version": "1.0.0",
+  "description": "GUI on Raspberry Pi Cloud (AWS)",
+  "scripts": {
+    "dev": "webpack --display-error-details --watch --mode development",
+    "build": "webpack --display-error-details -p"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Guvalif/raspberry-pi-cloud-gui.git"
+  },
+  "author": "PLEN Project Company Inc.",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/angular": "^1.6.50",
+    "@types/crypto-js": "^3.1.43",
+    "@types/paho-mqtt": "^1.0.3",
+    "moment": "^2.22.2",
+    "ts-loader": "^4.5.0",
+    "typescript": "^3.0.1",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0"
+  },
+  "dependencies": {
+    "angular": "^1.7.3",
+    "normalize.css": "^8.0.0",
+    "rxjs": "^6.2.2"
+  }
+}
