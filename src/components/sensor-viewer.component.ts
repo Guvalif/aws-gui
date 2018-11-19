@@ -5,10 +5,10 @@
  * @license The MIT License (See also : http://opensource.org/licenses/mit-license.php)
  */
 
-import { filter, flatMap } from 'rxjs/operators';
+import { flatMap, filter } from 'rxjs/operators';
 
 import { cloud_gui } from '../app.module';
-import MBS = require('../services/mqtt-bridge.service');
+import MBS = require('../services/msg-bridge.service');
 
 
 const view: string = `
@@ -33,11 +33,11 @@ class Controller
         '$http',
         MBS.SERVICE_NAME
     ];
-    constructor($http: ng.IHttpService, mbs: MBS.MQTTBridgeService)
+    constructor($http: ng.IHttpService, mbs: MBS.MessageBridgeService)
     {
         mbs.messageObservable()
             .pipe(
-                filter<any>(x => x.sender === 'raspberry-pi'),
+                filter<any>(x => location.href.indexOf(mbs.clientID(true)) !== -1),
                 flatMap<any, any>(x => $http.get(x.data.sensor))
             )
             .subscribe(

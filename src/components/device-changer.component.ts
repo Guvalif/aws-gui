@@ -1,5 +1,5 @@
 /**
- * @file Servo angle changer component
+ * @file Device changer component
  * @author Kazuyuki TAKASE <takase@plen.jp>
  * @copyright PLEN Project Company Inc, and all authors
  * @license The MIT License (See also : http://opensource.org/licenses/mit-license.php)
@@ -10,16 +10,17 @@ import MBS = require('../services/msg-bridge.service');
 
 
 const view: string = `
-<input
-  id="servo-slider"
-  type="range" min="25" max="125" step="5"
-  ng-change="$ctrl.onChange()" ng-model="$ctrl.vm_pwm"
->
+<div id="device-changer">
+  <b>IoT Device ID: </b>
+  <input
+    type="input" ng-change="$ctrl.onChange()" ng-model="$ctrl.vm_id"
+  >
+</div>
 `;
 
 class Controller
 {
-    public vm_pwm: number = 75;
+    public vm_id: number = 0;
 
     static $inject: string[] = [
         MBS.SERVICE_NAME
@@ -31,15 +32,11 @@ class Controller
 
     onChange(): void
     {
-        this.mbs.send({
-            sender: 'raspberry-pi-cloud-gui',
-            target: this.mbs.clientID(),
-            data: this.vm_pwm
-        });
+        this.mbs.client_id = this.vm_id;
     }
 };
 
-const COMPONENT_NAME: string = 'servoSlider';
+const COMPONENT_NAME: string = 'deviceChanger';
 
 const COMPONENT_DEFINITION = {
     bindings: {},

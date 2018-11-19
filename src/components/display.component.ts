@@ -5,10 +5,8 @@
  * @license The MIT License (See also : http://opensource.org/licenses/mit-license.php)
  */
 
-import { filter } from 'rxjs/operators';
-
 import { cloud_gui } from '../app.module';
-import MBS = require('../services/mqtt-bridge.service');
+import MBS = require('../services/msg-bridge.service');
 
 
 const view: string = `
@@ -22,12 +20,9 @@ class Controller
     static $inject: string[] = [
         MBS.SERVICE_NAME
     ];
-    constructor(mbs: MBS.MQTTBridgeService)
+    constructor(mbs: MBS.MessageBridgeService)
     {
         mbs.messageObservable()
-            .pipe(
-                filter<any>(x => x.sender === 'raspberry-pi')
-            )
             .subscribe(
                 x => this.vm_src = x.data.image,
                 e => console.log(e)
